@@ -1,0 +1,5 @@
+include README.md
+include LICENSE
+include CONTRIBUTORS
+include CONTRIBUTING.md
+recursive-include django_otp_keygen *.py

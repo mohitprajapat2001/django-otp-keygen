@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-otp-keygen"
+version = "0.1.0"
+description = "Django OTP key generator and validator"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name="Mohit Prajapat", email="mohitdevelopment2001@gmail.com" }]
+dependencies = ["Django>=5.0"]
+
+[project.urls]
+Homepage = "https://github.com/mohitprajapat2001/django-otp-keygen"
+Documentation = "https://github.com/mohitprajapat2001/django-otp-keygen/wiki"
