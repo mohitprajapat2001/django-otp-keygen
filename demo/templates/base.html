@@ -14,7 +14,8 @@
   <script src="{% static 'js/index.js'  %}"></script>
 
   <body data-theme="light" class="bg-base-100">
-    {% block main-content %} {% include 'components/navbar.html' %} {%block content%}
-    {%endblock%} {%endblock%} {% include 'components/messages.html' %}
+    {% block main-content %} {% include 'components/navbar.html' %} {%block
+    content%}{%endblock%} {% include 'components/footer.html' %} {%endblock%} {% include
+    'components/messages.html' %}
   </body>
 </html>

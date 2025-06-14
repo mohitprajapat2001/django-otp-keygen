@@ -1,18 +1,15 @@
-from django.contrib import admin
 from django.contrib.auth import admin as auth_admin
-from user.models import Otp
+
+from django_otp_keygen.admin import OtpAdmin as OTPADMIN
 
 
-@admin.register(Otp)
-class OtpAdmin(admin.ModelAdmin):
+class OtpAdmin(OTPADMIN):
     """
     Admin interface for managing OTPs.
     Inherits from UserAdmin to provide a user-friendly interface.
     """
 
-    list_display = ("user", "otp", "created_at", "expired_at")
-    search_fields = ("user__username", "otp_type", "status")
-    readonly_fields = ("created_at", "_otp")
+    pass
 
 
 class UserAdmin(auth_admin.UserAdmin):

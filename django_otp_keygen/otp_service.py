@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from django_otp_keygen.utils import encode_to_32_chars, get_otp_model
+from django_otp_keygen.utils import encode_to_32_chars, get_model, get_otp_model
 
 
 class OtpService:
@@ -17,7 +17,7 @@ class OtpService:
         """
         Generates a unique OTP key for the user based on the OTP type.
         """
-        username_field = settings.AUTH_USER_MDODEL.USERNAME_FIELD
+        username_field = get_model(settings.AUTH_USER_MODEL).USERNAME_FIELD
         username = getattr(user, username_field, "username")
         return encode_to_32_chars(username + otp_type)
 
@@ -28,6 +28,7 @@ class OtpService:
         otp, _ = self.OtpModel.objects.get_or_create(
             user=self.user, otp_type=self.otp_type, key=self.key
         )
+        return otp
 
     def generate_otp(self) -> str:
         """

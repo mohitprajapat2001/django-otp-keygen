@@ -134,8 +134,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 OTP_MODEL = "user.Otp"  # raise Value Error in not configured
 # Optional Configuration
 OTP_TYPE_CHOICES = [
-    ("sms", _("SMS-based OTP")),
-    ("email", _("Email-based OTP")),
+    ("email", _("Email Verification OTP")),
+    ("phone", _("Phone Verification OTP")),
+    ("forgot-password", _("Forgot Password OTP")),
+    ("reset-password", _("Reset Password OTP")),
+    ("two-factor-authentication", _("Two Factor Authentication OTP")),
 ]  # list(tuple(key, value))
 OTP_GENERATION_INTERVAL = 10  # in seconds, defaults to 30s
 OTP_LENGTH = 6  # int, defaults to 6

@@ -14,7 +14,7 @@ class OtpAdmin(admin.ModelAdmin):
 
     list_display = ("user", "otp", "otp_type", "status", "created_at", "expired_at")
     search_fields = ("user__username", "otp_type", "status")
-    readonly_fields = ("created_at", "_otp", "key")
+    readonly_fields = ("created_at", "_otp", "key", "updated_at")
     fieldsets = (
         (
             None,
@@ -41,7 +41,7 @@ class OtpAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "created_at",
-                    "modified_at",
+                    "updated_at",
                 )
             },
         ),
