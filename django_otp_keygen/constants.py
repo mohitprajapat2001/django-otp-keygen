@@ -14,3 +14,12 @@ class OtpStatus(TextChoices):
 
     PENDING = "pending", _("Pending")
     VERIFIED = "verified", _("Verified")
+
+
+class OtpType(TextChoices):
+    """
+    Enum-like class for OTP types.
+    """
+
+    DIGITS = "digits"
+    ALPHANUMERIC = "alphanumeric"
