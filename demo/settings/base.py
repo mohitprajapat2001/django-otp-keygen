@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,6 +34,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "user",
+    # Add after the app which uses django_otp_keygen
     "django_otp_keygen",
 ]
 
@@ -124,3 +128,13 @@ MEDIA_URL = "media/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Django OTP Keygen Configurations
+# Required Configuration
+OTP_MODEL = "user.Otp"  # raise Value Error in not configured
+# Optional Configuration
+OTP_TYPE_CHOICES = [
+    ("sms", _("SMS-based OTP")),
+    ("email", _("Email-based OTP")),
+]  # list(tuple(key, value))
+OTP_GENERATION_INTERVAL = 10  # in seconds, defaults to 30s
+OTP_LENGTH = 6  # int, defaults to 6
+GENERATE_ALPHANUMERIC_OTP = True  # bool, defaults to False
