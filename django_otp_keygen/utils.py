@@ -1,7 +1,29 @@
-from django.conf import settings
-from django_otp_keygen.constants import OTP_TYPE_CHOICES, OtpType
-from django.utils import timezone
 import hashlib
+
+from django.apps import apps
+from django.conf import settings
+from django.db.models import Model
+from django.utils import timezone
+
+from django_otp_keygen.constants import OTP_TYPE_CHOICES, OtpType
+
+
+def get_model(model_name: str) -> Model:
+    """ """
+    return apps.get_model(*model_name.split("."))
+
+
+def get_otp_model() -> Model:
+    """
+    Returns the OTP model based on the settings.
+    If not set, it defaults to 'django_otp_keygen.Otp'.
+    """
+    otp_model_name = getattr(settings, "OTP_MODEL", None)
+    if not otp_model_name:
+        raise ValueError(
+            "OTP_MODEL setting is not defined. Please set it to your OTP model."
+        )
+    return get_model(otp_model_name)
 
 
 def get_otp_type_choices():
@@ -61,8 +83,6 @@ def get_otp_format() -> tuple[bool, bool]:
 
     :return: tuple[digit_otp: bool, alphanumeric_otp: bool]
     """
-    # checks if the setting for generating a digit OTP is enabled.
-    digit_otp = getattr(settings, "GENERATE_DIGIT_OTP", True)
     # checks if the setting for generating an alphanumeric OTP is enabled.
     alphanumeric_otp = getattr(settings, "GENERATE_ALPHANUMERIC_OTP", False)
     # if alphanumeric return alphanumeric OTP type

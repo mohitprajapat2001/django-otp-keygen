@@ -1,17 +1,19 @@
-from django.db import models
-from django.utils.translation import gettext_lazy as _
 from django.conf import settings
+from django.contrib.auth.hashers import (
+    make_password as check_otp,
+    make_password as hash_otp,
+)
+from django.core.exceptions import ValidationError
+from django.db import models
+from django.utils.timezone import now, timedelta
+from django.utils.translation import gettext_lazy as _
+
+from django_otp_keygen.constants import OtpStatus
+from django_otp_keygen.otp import OTP
 from django_otp_keygen.utils import (
-    get_otp_type_choices,
     get_otp_expiry_time,
     get_otp_generation_interval,
-)
-from django_otp_keygen.constants import OtpStatus
-from django.core.exceptions import ValidationError
-from django.utils.timezone import now, timedelta
-from django.contrib.auth.hashers import (
-    make_password as hash_otp,
-    make_password as check_otp,
+    get_otp_type_choices,
 )
 
 
@@ -92,9 +94,11 @@ class AbstractOtp(models.Model):
         self._otp = hash_otp(value)
 
     @property
-    def is_expired(self):
+    def is_expired(self) -> bool:
         """
         Check if the OTP key is expired.
+
+        :returns: bool, True if the OTP key is expired, False otherwise.
         """
         return self.expired_at and now() > self.expired_at
 
@@ -139,9 +143,25 @@ class AbstractOtp(models.Model):
         """
         if self.updated_at < now() + timedelta(seconds=get_otp_generation_interval()):
             raise ValidationError(_("Please wait before generating new OTP."))
+        self.status = OtpStatus.PENDING
+        return OTP(key=self.key).now()
 
-    def validate_otp(self, otp):
+    def validate_otp(self, otp) -> bool:
         """
         Validate the provided OTP.
+
+        :param otp: str, The OTP to validate.
+        :returns: bool, True if the OTP is valid, False otherwise.
+        :raises ValidationError: If the OTP is already expired or already verified.
         """
-        raise NotImplementedError("Subclasses must implement this method.")
+        if not self.is_expired:
+            raise ValidationError(
+                _("The OTP is already expired, please request a new one.")
+            )
+        if self.is_verified:
+            raise ValidationError(_("The OTP is already verified."))
+        if check_otp(otp, self.otp):
+            self.status = OtpStatus.VERIFIED
+            self.save()
+            return True
+        return False

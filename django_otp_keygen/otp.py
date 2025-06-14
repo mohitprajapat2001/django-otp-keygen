@@ -1,10 +1,11 @@
-import hmac
 import hashlib
-import time
+import hmac
 import string
+import time
+
 from django_otp_keygen.utils import (
-    get_otp_generation_interval,
     get_otp_format,
+    get_otp_generation_interval,
     get_otp_length,
 )
 
@@ -12,11 +13,12 @@ from django_otp_keygen.utils import (
 class OTP:
     """Base OTP Class"""
 
-    def __init__(self, key: str, length: int = None):
+    def __init__(
+        self,
+        key: str,
+    ):
         self.key = key
-        self.length = length
-        if not length:
-            self.length = get_otp_length()
+        self.length = get_otp_length()
 
     @staticmethod
     def _get_time_counter():
