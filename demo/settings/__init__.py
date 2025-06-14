@@ -1,4 +1,4 @@
 try:
-    from demo.settings.dev import *  # noqa
+    from settings.dev import *  # noqa
 except ImportError:
-    from demo.settings.prod import *  # noqa
+    from settings.prod import *  # noqa

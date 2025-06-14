@@ -24,6 +24,7 @@ class AbstractOtp(models.Model):
 
     _otp = models.CharField(
         max_length=255,
+        editable=False,
         verbose_name=_("OTP"),
         help_text=_("The Protected OTP instance."),
         db_column="otp",
@@ -56,7 +57,7 @@ class AbstractOtp(models.Model):
     )
     status = models.CharField(
         max_length=20,
-        choices=OtpStatus.choices(),
+        choices=OtpStatus.choices,
         default=OtpStatus.PENDING,
         verbose_name=_("Status"),
         help_text=_("The status of the OTP key, e.g., Pending & Verified."),

@@ -47,6 +47,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # Add the login required middleware
+    "user.middleware.LoginRequiredMiddleware",
 ]
 
 ROOT_URLCONF = "conf.urls"
@@ -115,7 +117,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = "templates/static/"
+STATICFILES_DIRS = [BASE_DIR / "templates/static/"]
 STATIC_ROOT = "assets/"
 
 MEDIA_ROOT = "media/"
