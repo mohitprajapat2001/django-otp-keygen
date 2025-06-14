@@ -9,7 +9,7 @@ colorama==0.4.6
 decorator==5.2.1
 distlib==0.3.9
 Django==5.2.2
-django-otp-keygen @ file:///E:/django_otp_keygen/dist/django_otp_keygen-0.1.0-py3-none-any.whl#sha256=92bac0005941ac5f62fa2ef37f4973dd88a72522d68b953867e0721a09099bf3
+../dist/django_otp_keygen-0.1.0-py3-none-any.whl
 docutils==0.21.2
 executing==2.2.0
 filelock==3.18.0

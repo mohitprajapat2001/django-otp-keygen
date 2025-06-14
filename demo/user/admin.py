@@ -1,9 +1,9 @@
 from django.contrib.auth import admin as auth_admin
 
-from django_otp_keygen.admin import OtpAdmin as OTPADMIN
+from django_otp_keygen.admin import AbstractOtpAdmin
 
 
-class OtpAdmin(OTPADMIN):
+class OtpAdmin(AbstractOtpAdmin):
     """
     Admin interface for managing OTPs.
     Inherits from UserAdmin to provide a user-friendly interface.

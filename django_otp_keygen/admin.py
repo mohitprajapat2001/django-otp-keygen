@@ -6,7 +6,7 @@ Otp = get_otp_model()
 
 
 @admin.register(Otp)
-class OtpAdmin(admin.ModelAdmin):
+class AbstractOtpAdmin(admin.ModelAdmin):
     """
     Admin interface for managing OTPs.
     Inherits from UserAdmin to provide a user-friendly interface.

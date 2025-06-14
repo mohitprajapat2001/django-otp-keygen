@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>django-otp-keygen</title>
+    <style>
+      /* From extension vscode.github */
+      /*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+      .vscode-dark img[src$="\#gh-light-mode-only"],
+      .vscode-light img[src$="\#gh-dark-mode-only"],
+      .vscode-high-contrast:not(.vscode-high-contrast-light)
+        img[src$="\#gh-light-mode-only"],
+      .vscode-high-contrast-light img[src$="\#gh-dark-mode-only"] {
+        display: none;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css"
+    />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI",
+          system-ui, "Ubuntu", "Droid Sans", sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+    </style>
+    <style>
+      .task-list-item {
+        list-style-type: none;
+      }
+
+      .task-list-item-checkbox {
+        margin-left: -20px;
+        vertical-align: middle;
+        pointer-events: none;
+      }
+    </style>
+    <style>
+      :root {
+        --color-note: #0969da;
+        --color-tip: #1a7f37;
+        --color-warning: #9a6700;
+        --color-severe: #bc4c00;
+        --color-caution: #d1242f;
+        --color-important: #8250df;
+      }
+    </style>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-note: #2f81f7;
+          --color-tip: #3fb950;
+          --color-warning: #d29922;
+          --color-severe: #db6d28;
+          --color-caution: #f85149;
+          --color-important: #a371f7;
+        }
+      }
+    </style>
+    <style>
+      .markdown-alert {
+        padding: 0.5rem 1rem;
+        margin-bottom: 16px;
+        color: inherit;
+        border-left: 0.25em solid #888;
+      }
+
+      .markdown-alert > :first-child {
+        margin-top: 0;
+      }
+
+      .markdown-alert > :last-child {
+        margin-bottom: 0;
+      }
+
+      .markdown-alert .markdown-alert-title {
+        display: flex;
+        font-weight: 500;
+        align-items: center;
+        line-height: 1;
+      }
+
+      .markdown-alert .markdown-alert-title .octicon {
+        margin-right: 0.5rem;
+        display: inline-block;
+        overflow: visible !important;
+        vertical-align: text-bottom;
+        fill: currentColor;
+      }
+
+      .markdown-alert.markdown-alert-note {
+        border-left-color: var(--color-note);
+      }
+
+      .markdown-alert.markdown-alert-note .markdown-alert-title {
+        color: var(--color-note);
+      }
+
+      .markdown-alert.markdown-alert-important {
+        border-left-color: var(--color-important);
+      }
+
+      .markdown-alert.markdown-alert-important .markdown-alert-title {
+        color: var(--color-important);
+      }
+
+      .markdown-alert.markdown-alert-warning {
+        border-left-color: var(--color-warning);
+      }
+
+      .markdown-alert.markdown-alert-warning .markdown-alert-title {
+        color: var(--color-warning);
+      }
+
+      .markdown-alert.markdown-alert-tip {
+        border-left-color: var(--color-tip);
+      }
+
+      .markdown-alert.markdown-alert-tip .markdown-alert-title {
+        color: var(--color-tip);
+      }
+
+      .markdown-alert.markdown-alert-caution {
+        border-left-color: var(--color-caution);
+      }
+
+      .markdown-alert.markdown-alert-caution .markdown-alert-title {
+        color: var(--color-caution);
+      }
+    </style>
+  </head>
+
+  <body class="vscode-body vscode-light">
+    <h1 id="django-otp-keygen">django-otp-keygen</h1>
+    <p>
+      A Django package to generate and manage One-Time Passwords (OTP) for user
+      authentication. A configurable, pluggable, and extensible OTP generator and
+      validator for Django.
+    </p>
+    <h2 id="features">Features</h2>
+    <ul>
+      <li>OTP generation and validation</li>
+      <li>Easy integration with Django projects</li>
+      <li>Secure and extensible</li>
+    </ul>
+    <h2 id="installation">Installation</h2>
+    <pre><code class="language-bash">pip install django-otp-keygen
+</code></pre>
+    <h2 id="-required-configuration">🔧 Required Configuration</h2>
+    <p>Add the following to your <code>settings.py</code>:</p>
+    <pre><code class="language-python">OTP_MODEL = <span class="hljs-string">&quot;user.Otp&quot;</span>  <span class="hljs-comment"># Required. Raises ValueError if not configured</span>
+</code></pre>
+    <h2 id="️-optional-settings">⚙️ Optional Settings</h2>
+    <p>Add the following optional settings to your <code>settings.py</code>:</p>
+    <pre><code class="language-python">OTP_TYPE_CHOICES = [
+    (<span class="hljs-string">&quot;email&quot;</span>, _(<span class="hljs-string">&quot;Email Verification OTP&quot;</span>)),
+    (<span class="hljs-string">&quot;phone&quot;</span>, _(<span class="hljs-string">&quot;Phone Verification OTP&quot;</span>)),
+    (<span class="hljs-string">&quot;forgot-password&quot;</span>, _(<span class="hljs-string">&quot;Forgot Password OTP&quot;</span>)),
+    (<span class="hljs-string">&quot;reset-password&quot;</span>, _(<span class="hljs-string">&quot;Reset Password OTP&quot;</span>)),
+    (<span class="hljs-string">&quot;two-factor-authentication&quot;</span>, _(<span class="hljs-string">&quot;Two Factor Authentication OTP&quot;</span>)),
+]
+OTP_GENERATION_INTERVAL = <span class="hljs-number">10</span>  <span class="hljs-comment"># in seconds, default is 30</span>
+OTP_LENGTH = <span class="hljs-number">6</span>  <span class="hljs-comment"># default is 6</span>
+GENERATE_ALPHANUMERIC_OTP = <span class="hljs-literal">True</span>  <span class="hljs-comment"># default is False</span>
+</code></pre>
+    <h2 id="-abstract-model-example">🧱 Abstract Model Example</h2>
+    <p>Create your custom model using <code>AbstractOtp</code>:</p>
+    <pre><code class="language-python"><span class="hljs-keyword">from</span> django_otp_keygen.models <span class="hljs-keyword">import</span> AbstractOtp
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Otp</span>(<span class="hljs-title class_ inherited__">AbstractOtp</span>):
+    <span class="hljs-keyword">pass</span>
+</code></pre>
+    <h2 id="extend-admin">Extend Admin</h2>
+    <p>Create your custom admin using <code>AbstractOtpAdmin</code>:</p>
+    <pre><code class="language-python"><span class="hljs-keyword">from</span> django_otp_keygen.admin <span class="hljs-keyword">import</span> AbstractOtpAdmin
+
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">OtpAdmin</span>(<span class="hljs-title class_ inherited__">AbstractOtpAdmin</span>):
+    <span class="hljs-string">&quot;&quot;&quot;
+    Admin interface for managing OTPs.
+    Inherits from UserAdmin to provide a user-friendly interface.
+    &quot;&quot;&quot;</span>
+
+    <span class="hljs-keyword">pass</span>
+</code></pre>
+    <h2 id="-usage-otp-service">🔐 Usage: OTP Service</h2>
+    <pre><code class="language-python"><span class="hljs-keyword">from</span> django_otp_keygen.services <span class="hljs-keyword">import</span> OtpService
+
+otp_service = OtpService(user, <span class="hljs-string">&quot;email&quot;</span>)
+otp_value = otp_service.generate_otp()
+
+<span class="hljs-comment"># To verify</span>
+is_valid = otp_service.verify_otp(input_otp)
+</code></pre>
+    <h2 id="-otp-validation-logic">✅ OTP Validation Logic</h2>
+    <ul>
+      <li>
+        <p>Ensures OTP is not expired (expired_at)</p>
+      </li>
+      <li>
+        <p>Prevents re-verification</p>
+      </li>
+      <li>
+        <p>Automatically sets new expiration on generation</p>
+      </li>
+      <li>
+        <p>OTP format is digit or alphanumeric based on settings</p>
+      </li>
+    </ul>
+    <h2 id="-model-properties">🧪 Model Properties</h2>
+    <ul>
+      <li>
+        <p><code>otp_instance.is_expired</code></p>
+      </li>
+      <li>
+        <p><code>otp_instance.is_verified</code></p>
+      </li>
+      <li>
+        <p><code>otp_instance.is_pending</code></p>
+      </li>
+      <li>
+        <p><code>otp_instance.is_active</code></p>
+      </li>
+    </ul>
+    <h2 id="-settings-reference">🔍 Settings Reference</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Setting</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>OTP_MODEL</code></td>
+          <td>str</td>
+          <td>—</td>
+          <td>Required. Points to your model</td>
+        </tr>
+        <tr>
+          <td><code>OTP_TYPE_CHOICES</code></td>
+          <td>list of tuples</td>
+          <td>predefined</td>
+          <td>Custom OTP purpose types</td>
+        </tr>
+        <tr>
+          <td><code>OTP_GENERATION_INTERVAL</code></td>
+          <td>int</td>
+          <td><code>30</code></td>
+          <td>OTP valid window in seconds</td>
+        </tr>
+        <tr>
+          <td><code>OTP_LENGTH</code></td>
+          <td>int</td>
+          <td><code>6</code></td>
+          <td>OTP length</td>
+        </tr>
+        <tr>
+          <td><code>GENERATE_ALPHANUMERIC_OTP</code></td>
+          <td>bool</td>
+          <td><code>False</code></td>
+          <td>Use mixed alphanumeric format</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2 id="-directory-structure">📁 Directory Structure</h2>
+    <pre><code class="language-bash">django_otp_keygen/
+├── models.py
+├── services.py
+├── otp.py
+├── utils.py
+├── constants.py
+</code></pre>
+    <h2 id="contributing">Contributing</h2>
+    <p>Contributions, issues, and feature requests are welcome!</p>
+    <p>If you'd like to help improve django-otp-keygen, please follow these steps:</p>
+    <ol>
+      <li>
+        <p>🍴 Fork the repository</p>
+      </li>
+      <li>
+        <p>
+          🛠️ Create a new branch (<code>git checkout -b feature/your-feature</code>)
+        </p>
+      </li>
+      <li>
+        <p>💾 Make your changes</p>
+      </li>
+      <li>
+        <p>🧪 Write or update tests if needed</p>
+      </li>
+      <li>
+        <p>📩 Commit your changes and push (git push origin feature/your-feature)</p>
+      </li>
+      <li>
+        <p>📝 Open a pull request describing your changes</p>
+      </li>
+    </ol>
+    <h2 id="license">License</h2>
+    <p>This reposiitory is under MIT Licence File</p>
+    <h2 id="donations">Donations</h2>
+    <p>If you find this useful, consider sponsoring or donating.</p>
+  </body>
+</html>
