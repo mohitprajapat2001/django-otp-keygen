@@ -13,14 +13,12 @@ class LoginRequiredMiddleware(MiddlewareMixin):
             reverse("login"),
             reverse("register"),
             reverse("logout"),
-            reverse("admin:login"),
         ]
 
         # Skip for static/media paths or if user is already authenticated
         if (
             request.path.startswith("/static/")
             or request.path.startswith("/media/")
-            or request.path.startswith("/admin/")
             or request.user.is_authenticated
             or request.path in allowed_paths
         ):

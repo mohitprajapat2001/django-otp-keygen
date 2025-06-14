@@ -6,9 +6,7 @@
       <p class="py-6">
         Welcome! Please enter your details to create an account. If you already have an
         account, please
-        <a class="link link-hover text-primary italic" href="{% url 'login' %}"
-          >login</a
-        >
+        <a class="link link-hover text-primary italic" href="{% url 'login' %}">login</a>
         instead.
       </p>
     </div>
@@ -16,8 +14,9 @@
       <form method="POST" class="card-body">
         {% csrf_token %}
         <fieldset class="fieldset">
-          {% for field in form %} {% include 'partials/form_field.html' with field=field
-          %} {% endfor %}
+          {% for field in form %}
+          {% include 'partials/form_field.html' with field=field%}
+          {% endfor %}
           <button type="submit" class="btn btn-neutral mt-4">Register</button>
         </fieldset>
       </form>
