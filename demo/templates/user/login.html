@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block main-content %}
+<div class="hero bg-base-200 min-h-screen">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="text-center lg:text-left">
+      <h1 class="text-5xl font-bold">Login now!</h1>
+      <p class="py-6">
+        Welcome back! Please enter your credentials to access your account. If you don't
+        have an account, please
+        <a class="link link-hover text-primary italic" href="{% url 'register' %}"
+          >register</a
+        >
+        first.
+      </p>
+    </div>
+    <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+      <form method="POST" class="card-body">
+        {% csrf_token %}
+        <fieldset class="fieldset">
+          {% for field in form %} {% include 'partials/form_field.html' with field=field
+          %} {% endfor %}
+          <button type="submit" class="btn btn-neutral mt-4">Login</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

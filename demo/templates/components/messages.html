@@ -1,0 +1,13 @@
+<div class="toast toast-top toast-end">
+  {% if messages %} {% for message in messages %}
+  <div class="alert alert-info shadow-lg">
+    <span>{{message}}</span>
+  </div>
+  {% endfor %} {%endif%} {% if form.non_field_errors %}
+  <!-- Non fields error -->
+  {% for error in form.non_field_errors %}
+  <div class="alert alert-info shadow-lg">
+    <span>{{error}}</span>
+  </div>
+  {% endfor %} {% endif %}
+</div>

@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{%block doc-title %}Django OTP Keygen{%endblock%}</title>
+  <link rel="shortcut icon" href="{% static 'img/otp-2.png' %}" type="image/x-icon" />
+  {% block extracss %}{% endblock %}
+  <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/daisy5.css' %}" />
+</head>
+<script src="{% static 'js/jquery.js'  %}"></script>
+<script src="{% static 'js/tailwind.js'  %}"></script>
+<script src="{% static 'js/index.js'  %}"></script>
+
+<body data-theme="light" class="bg-base-100">
+  {% block main-content %}
+  {% include 'components/navbar.html' %}
+  {%block content%} {%endblock%}
+  {% include 'components/footer.html' %}
+  {%endblock%}
+  {% include 'components/messages.html' %}
+</body>
+
+</html>

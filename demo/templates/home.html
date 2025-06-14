@@ -1,0 +1,88 @@
+{% extends 'base.html' %} {% block content %}
+<div class="hero bg-base-200 min-h-screen">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      {% if generated_otp %}
+      <h1 class="text-5xl font-bold">Verify OTP</h1>
+      <p class="py-6">
+        Your OTP has been generated successfully! Please enter the OTP below to verify.
+      </p>
+      <div class="flex items-center join justify-center">
+        <input
+          type="text"
+          value="{{generated_otp}}"
+          readonly
+          class="input border border-primary"
+        />
+        <button
+          class="btn btn-primary tooltip"
+          onclick="navigator.clipboard.writeText('{{generated_otp}}')"
+          data-tip="Copy to clipboard"
+        >
+          <svg
+            id="Copy_to_Clipboard_24"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <rect width="24" height="24" stroke="none" fill="#000000" opacity="0" />
+
+            <g transform="matrix(0.77 0 0 0.77 12 12)">
+              <path
+                style="
+                  stroke: none;
+                  stroke-width: 1;
+                  stroke-dasharray: none;
+                  stroke-linecap: butt;
+                  stroke-dashoffset: 0;
+                  stroke-linejoin: miter;
+                  stroke-miterlimit: 4;
+                  fill: rgb(0, 0, 0);
+                  fill-rule: nonzero;
+                  opacity: 1;
+                "
+                transform=" translate(-16, -16)"
+                d="M 14 3 C 12.742188 3 11.847656 3.890625 11.40625 5 L 4 5 L 4 25 L 24 25 L 24 5 L 16.59375 5 C 16.152344 3.890625 15.257813 3 14 3 Z M 14 5 C 14.566406 5 15 5.433594 15 6 L 15 7 L 18 7 L 18 9 L 10 9 L 10 7 L 13 7 L 13 6 C 13 5.433594 13.433594 5 14 5 Z M 6 7 L 8 7 L 8 11 L 20 11 L 20 7 L 22 7 L 22 23 L 6 23 Z M 14 15 L 14 17 L 16 17 L 16 15 Z M 18 15 L 18 17 L 20 17 L 20 15 Z M 26 15 L 26 17 L 28 17 L 28 15 Z M 14 19 L 14 21 L 16 21 L 16 19 Z M 26 19 L 26 21 L 28 21 L 28 19 Z M 26 23 L 26 25 L 28 25 L 28 23 Z M 14 27 L 14 29 L 16 29 L 16 27 Z M 18 27 L 18 29 L 20 29 L 20 27 Z M 22 27 L 22 29 L 24 29 L 24 27 Z M 26 27 L 26 29 L 28 29 L 28 27 Z"
+                stroke-linecap="round"
+              />
+            </g>
+          </svg>
+        </button>
+      </div>
+      {% else%}
+      <h1 class="text-5xl font-bold">Generate OTP</h1>
+      <p class="py-6">
+        Use this tool to generate a one-time password (OTP) for secure authentication.
+        Enter your desired length and click "Verify OTP" to generate your OTP.
+      </p>
+      {% endif %}
+      <form
+        method="POST"
+        action="{% url 'home' %}"
+        class="fieldset flex flex-col gap-4"
+      >
+        {% csrf_token %}
+        <div>
+          <legend class="fieldset-legend">Otp Types</legend>
+          <select class="select w-full" name="otp_type">
+            {% for key, type in otp_types %}
+            <option value="{{key}}">{{type}}</option>
+            {%endfor%}
+          </select>
+        </div>
+        {% if generated_otp %}
+        <div>
+          <legend class="fieldset-legend">Otp</legend>
+          <input type="text" name="otp" class="input w-full" />
+        </div>
+        <button class="btn btn-primary">Verify OTP</button>
+        {% else %}
+        <button class="btn btn-primary">Generate OTP</button>
+        {%endif%}
+      </form>
+    </div>
+  </div>
+</div>
+{%endblock%}

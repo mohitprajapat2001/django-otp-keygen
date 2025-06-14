@@ -1,0 +1,13 @@
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">{{field.label}}</legend>
+  <input
+    class="input validator w-full"
+    type="{{field.type}}"
+    name="{{field.name}}"
+    required
+    placeholder="{{field.label}}"
+  />
+  {% if field.errors %} {% for error in field.errors %}
+  <div class="text-error text-sm">{{error}}</div>
+  {% endfor %} {% endif %}
+</fieldset>
