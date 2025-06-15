@@ -1,5 +1,6 @@
-{% extends 'base.html' %} {% block doc-title %}Django OTP Keygen - Documentation{%
-endblock %} {% block extracss %}{% endblock %} {% block content %}
+{% extends 'base.html' %}
+{% block doc-title %}Django OTP Keygen - Documentation{%endblock %}
+{% block content %}
 <div class="max-w-5xl mx-auto py-8">
   <h1 class="text-3xl font-bold">Documentation</h1>
   <p class="text-base">
@@ -23,9 +24,7 @@ endblock %} {% block extracss %}{% endblock %} {% block content %}
   <h2 class="text-2xl font-semibold mt-6">🔧 Required Configuration</h2>
   <p class="mt-3">Add the following to your <code>settings.py</code>:</p>
   <div class="mockup-code w-full">
-    <pre
-      data-prefix="$"
-    ><code>OTP_MODEL = "user.Otp" # Required. Raises ValueError if not configured.</code></pre>
+    <pre data-prefix="$"><code>OTP_MODEL = "user.Otp" # Required. Raises ValueError if not configured.</code></pre>
   </div>
 
   <h2 class="text-2xl font-semibold mt-6">⚙️ Optional Settings</h2>
@@ -159,8 +158,7 @@ class Otp(AbstractOtp):
     <li>💾 Make your changes</li>
     <li>🧪 Write or update tests if needed</li>
     <li>
-      📩 Commit your changes and push (<code>git push origin feature/your-feature</code
-      >)
+      📩 Commit your changes and push (<code>git push origin feature/your-feature</code>)
     </li>
     <li>📝 Open a pull request describing your changes</li>
   </ol>
