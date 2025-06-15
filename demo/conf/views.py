@@ -2,7 +2,9 @@ from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
+from django_otp_keygen.constants import OtpStatus
+from user.models import Otp
 
 from django_otp_keygen.otp_service import OtpService
 
@@ -66,6 +68,25 @@ class HomeView(TemplateView):
 
 
 home_view = HomeView.as_view()
+
+
+class ClearView(View):
+    def get(self, request, *args, **kwargs):
+        try:
+            otp_service = Otp.objects.filter(
+                user=request.user, status=OtpStatus.VERIFIED
+            )
+            if otp_service:
+                otp_service.delete()
+            messages.success(request, "OTP cleared successfully.")
+        except Exception as err:
+            messages.error(
+                request, err.message or "An error occurred while clearing the OTP."
+            )
+        return redirect(reverse("home"))
+
+
+clear_view = ClearView.as_view()
 
 
 class DocsView(TemplateView):

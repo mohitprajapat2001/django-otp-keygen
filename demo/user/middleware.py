@@ -13,6 +13,7 @@ class LoginRequiredMiddleware(MiddlewareMixin):
             reverse("login"),
             reverse("register"),
             reverse("logout"),
+            reverse("docs"),
         ]
 
         # Skip for static/media paths or if user is already authenticated

@@ -10,7 +10,7 @@ $(document).ready(() => {
       window.localStorage.setItem("theme", "dark")
     } else {
       body.setAttribute("data-theme", "light")
-      window.localStorage.setItem("theme", "dark")
+      window.localStorage.setItem("theme", "light")
     }
   })
   // Check if the theme is set in local storage

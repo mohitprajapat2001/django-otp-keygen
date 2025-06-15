@@ -1,4 +1,4 @@
-from conf.views import docs_view, home_view
+from conf.views import docs_view, home_view, clear_view
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -7,6 +7,7 @@ from django.urls import include, path
 urlpatterns = [
     path("", home_view, name="home"),
     path("docs/", docs_view, name="docs"),
+    path("clear/", clear_view, name="clear"),
     # Include user authentication URLs
     path("user/", include("user.urls")),
 ]
