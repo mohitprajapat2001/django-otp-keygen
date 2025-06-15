@@ -14,4 +14,4 @@ dependencies = ["Django>=5.0"]
 
 [project.urls]
 Homepage = "https://github.com/mohitprajapat2001/django-otp-keygen"
-Documentation = "https://github.com/mohitprajapat2001/django-otp-keygen/wiki"
+Documentation = "https://djangootpkeygen.pythonanywhere.com/docs/"
