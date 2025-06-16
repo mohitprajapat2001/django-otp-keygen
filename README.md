@@ -142,7 +142,7 @@ If you'd like to help improve django-otp-keygen, please follow these steps:
 
 ## License
 
-This reposiitory is under MIT Licence File
+This reposiitory is under [MIT License](./LICENSE).
 
 ## Donations
 
